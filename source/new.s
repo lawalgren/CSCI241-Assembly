@@ -2,8 +2,13 @@
 Message:
 	.ascii "Hello World\0"
 	i: .long 0
-	KarlsWeirdTypeInstance: .byte 0x00, 0x00, 0x00, 0x00, 0x00
-		
+b:
+	.rept 10
+		.long 0x00
+	.endr
+
+// long b[10];
+
 	.text
 	.globl	main
 	
@@ -12,6 +17,12 @@ main:
 	push	%rbp
 	mov		%rsp, %rbp
 	sub		$32, %rsp
+	
+	lea b, %rbx
+	mov $3, %rcx
+	mov (%rbx, %rcx,4), %eax
+	
+	//b[3] = b[2] + 1;
 	
 	// i=0;
 	//movl $0, %eax
