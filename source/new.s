@@ -19,9 +19,14 @@ main:
 	sub		$32, %rsp
 	
 	lea b, %rbx
-	mov $3, %rcx
-	mov (%rbx, %rcx,4), %eax
+	add $12, %rbx
+	movl $0xa5,(%rbx)
 	
+	lea b, %rcx
+	mov $3, %rcx
+	mov (%rbx, %rcx, 4), %eax
+	incl (%rbx, %rcx, 4)
+	mov (%rbx,%rcx, 4), %eax
 	//b[3] = b[2] + 1;
 	
 	// i=0;
