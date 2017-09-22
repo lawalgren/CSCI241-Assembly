@@ -1,8 +1,9 @@
 .section .data
 Message:
 	.ascii "Hello World\0"
+	.text
 	.globl	main
-.text
+
 main:
 	push	%rbp
 	mov		%rsp, %rbp
