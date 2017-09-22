@@ -2,6 +2,7 @@
 Message:
 	.ascii "Hello World\0"
 	i: .long 0
+// long i = 0;
 b:
 	.rept 10
 		.long 0x00
@@ -22,12 +23,12 @@ main:
 	add $12, %rbx
 	movl $0xa5,(%rbx)
 	
-	lea b, %rcx
+	lea b, %rbx
 	mov $3, %rcx
 	mov (%rbx, %rcx, 4), %eax
 	incl (%rbx, %rcx, 4)
 	mov (%rbx,%rcx, 4), %eax
-	//b[3] = b[2] + 1;
+	//b[3] = b[3] + 1;
 	
 	// i=0;
 	//movl $0, %eax
