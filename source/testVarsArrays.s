@@ -35,7 +35,7 @@ stuff:
 	incl i
 	mov $10, %rax
 	cmp %rax, i
-	js stuff
+js stuff
 	
 //while (i - 10 < 0) {
 //	puts("hello world");
