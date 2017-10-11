@@ -1,10 +1,10 @@
 .section .data
 
 i:
-	.long 2297
+	.long 1975959
 
 stack:
-	.rept 17
+	.rept 32
 	.long 0x00
 	.endr
 

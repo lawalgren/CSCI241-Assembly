@@ -1,3 +1,10 @@
+.macro setup base
+	mov		i(%rip), %rax
+	mov		$\base, %rbx
+	xor		%rsi, %rsi
+	jmp		convert
+.endm
+
 .section .data
 i:
 	.long 999595
@@ -34,21 +41,13 @@ top:
 	jmp		done
 
 bin:
-	mov		i(%rip), %rax
-	mov		$2, %rbx
-	xor		%rsi, %rsi
-	jmp		convert
+	setup	2
 
 deci:
-	mov		i(%rip), %rax
-	mov		$10,  %rbx
-	xor		%rsi, %rsi
-	jmp		convert
+	setup 10
 
 hex:
-	mov		i(%rip), %rax
-	mov 	$16, %rbx
-	xor		%rsi, %rsi
+	setup 16
 
 convert:
 	cmp		$0, %rax
@@ -66,7 +65,7 @@ output:
 	dec 	%rsi
 	lea		stack(%rip), %rax
 	mov		(%rax, %rsi, 4), %rcx
-	movl		$0, (%rax, %rsi, 4)
+	movl	$0, (%rax, %rsi, 4)
 
 	and		$0xff, %rcx
 	cmp		$9, %rcx
