@@ -86,7 +86,7 @@ call	puts
 .endm
 
 .macro	outputInt intName
-string  fstring_\intName,"%d\0"
+string  fstring_\intName,"%d"
 lea			fstring_\intName, %rcx
 mov			\intName, %rdx
 call		printf

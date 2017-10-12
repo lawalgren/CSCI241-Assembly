@@ -1,46 +1,46 @@
 .include "macros.s"
 programStart
-  int num,35
+  int num,111
   int low,0
   int high,0
-  mov num,%rax
-  mov num,%rbx
+  mov num,%eax
+  mov num,%ebx
 guess:
-  cmp $0,%rax
+  cmp $0,%eax
   je  endguess
-  shr $2,%rax
-  shr %rbx
+  shr $2,%eax
+  shr %ebx
   jmp guess
 endguess:
-  mov %rbx, %rax
-  shl %rax
-  mov %rbx, low
-  mov %rax, high
-  xor %rdx,%rdx
+  mov %ebx, %eax
+  shl %eax
+  mov %ebx, low
+  mov %eax, high
 calculate:
-  mov low,%rax
-  mov high,%rbx
-  mov %rax,%rcx
-  mov %rbx,%rdx
-  sub %rcx,%rdx
+  mov low,%eax
+  mov high,%ebx
+  mov %eax,%ecx
+  mov %ebx,%edx
+  sub %ecx,%edx
 
-  cmp $1,%rcx
-  jle endcalc
-  add %rax,%rbx
-  shr %rbx
+  cmp $1,%edx
+  jbe endcalc
+  add %eax,%ebx
+  shr %ebx
 
-  and $0xff,%rbx
-  mov %rbx,%rax
-  mov %rbx,%rcx
+  and $0xff,%ebx
+  mov %ebx,%eax
+  mov %ebx,%ecx
+  xor %edx,%edx
 
-  mul %rbx
-  cmp %rax,num
-  jge greater
-  mov %rcx,low
+  mul %ebx
+  cmp num,%eax
+  ja  greater
+  mov %ecx,low
   jmp calculate
 greater:
-  mov %rcx,high
+  mov %ecx,high
   jmp calculate
 endcalc:
-  outputInt high
+outputInt low
 programEnd
