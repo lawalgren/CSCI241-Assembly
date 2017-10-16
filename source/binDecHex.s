@@ -29,14 +29,14 @@ main:
 	mov		%rsp, %rbp
 	sub		$32, %rsp
 
-	mov 	i(%rip), %rbx
+	mov 	i, %ebx
 	lea		binStr, %rax
 	add		$32, %rax
 binary:
-	cmp		$0, %rbx
+	cmp		$0, %ebx
 	je		outputbin
 
-	shr		%rbx
+	shr		%ebx
 	jc		one
 	movb	$0x30, (%rax)
 	dec		%rax
@@ -48,53 +48,53 @@ one:
 
 	jmp		binary
 outputbin:
-	lea		binStr, %rcx
+	lea		binStr, %ecx
 	call	puts
 
-	mov		i(%rip), %rax
-	mov		$10, %rbx
+	mov		i, %eax
+	mov		$10, %ebx
 	lea		decStr, %rcx
 	add		$32, %rcx
 	decimal:
-	cmp		$0, %rax
+	cmp		$0, %eax
 	je		outputdec
 
-	xor		%rdx, %rdx
-	div		%rbx
-	add		$0x30,%rdx
-	mov		%rdx,(%rcx)
+	xor		%edx, %edx
+	div		%ebx
+	add		$0x30,%dl
+	mov		%dl,(%rcx)
 	dec		%rcx
 
 	jmp		decimal
 	outputdec:
-	lea		decStr,%rcx
+	lea		decStr,%ecx
 	call	puts
 
-	mov		i, %rax
+	mov		i, %eax
 	lea		hexStr, %rcx
 	add		$32, %rcx
 	hex:
-	cmp		$0, %rax
+	cmp		$0, %eax
 	je		outputhex
 
-	mov		%rax, %rbx
-	and		$0xF, %rbx
+	mov		%eax, %ebx
+	and		$0xF, %ebx
 
-	cmp		$9, %rbx
+	cmp		$9, %ebx
 	jg		letter
 
-	add		$0x30, %rbx
-	mov		%rbx, (%rcx)
+	add		$0x30, %bl
+	mov		%bl, (%rcx)
 	dec		%rcx
-	shr		$4, %rax
+	shr		$4, %eax
 
 	jmp		hex
 
 	letter:
-	add		$0x37, %rbx
-	mov		%rbx, (%rcx)
+	add		$0x37, %bl
+	mov		%bl, (%rcx)
 	dec		%rcx
-	shr		$4, %rax
+	shr		$4, %eax
 
 	jmp		hex
 	outputhex:
