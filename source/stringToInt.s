@@ -1,7 +1,7 @@
 .include "macros.s"
 programStart
-string nString,"1234"
-int base,10
+string nString,"ED5"
+int base,16
 int workingNum,0
 
 lea nString, %ebx

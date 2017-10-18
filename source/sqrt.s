@@ -1,6 +1,6 @@
 .include "macros.s"
 programStart
-  int num,111
+  int num,64
   int low,0
   int high,0
   mov num,%eax
@@ -42,5 +42,27 @@ greater:
   mov %ecx,high
   jmp calculate
 endcalc:
-outputInt low
+  mov low,%eax
+  mov low,%ebx
+  xor %edx,%edx
+  mul %ebx
+  mov %eax,%ecx
+
+  mov high,%eax
+  mov high,%ebx
+  xor %edx,%edx
+  mul %ebx
+  mov %eax,%edx
+
+  sub num,%ecx
+  sub num,%edx
+  neg %ecx
+  cmp %ecx,%edx
+
+  jl  Ohigh
+  outputInt low
+  jmp end
+Ohigh:
+  outputInt high
+end:
 programEnd
